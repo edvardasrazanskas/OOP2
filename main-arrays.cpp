@@ -1,4 +1,3 @@
-#include "funkcijos.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,6 +15,7 @@ struct Studentas{
 
 int CountN(string line);
 float RastiMediana(int arr[], int n);
+int GetIntInput();
 
 void Ivestis(Studentas studentai[], int &m);
 void Ivestis2(Studentas studentai[], int &m);
@@ -26,20 +26,29 @@ void Isvestis(Studentas studentai[], int m);
 const string INFILENAME = "studentai10000.txt";
 const int ARR_SIZE = 10000;
 
+
 int main(){
     int m = 0;
     Studentas studentai[ARR_SIZE];
 
     cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
-    int pasirinkimas;
-    cin >> pasirinkimas;
+    
+    while (true){
+        float pasirinkimas = GetIntInput();
 
-    if ( pasirinkimas == 1 ) Ivestis(studentai, m); // ***** Reading from a file
-    else if (pasirinkimas == 2) Ivestis2(studentai, m); // Reading from user input
-    else if (pasirinkimas == 3) Ivestis3(studentai, m); // Generating random number of random grades for random number of students
-    else {
-        cout << "Tokio pasirinkimo nera. Iveskite is naujo: ";
-        cin >> pasirinkimas;
+        if ( pasirinkimas == 1 ){
+            Ivestis(studentai, m); // ***** Reading from a file
+            break;
+        }
+        else if (pasirinkimas == 2){
+            Ivestis2(studentai, m); // Reading from user input
+            break;
+        }
+        else if (pasirinkimas == 3){
+            Ivestis3(studentai, m); // Generating random number of random grades for random number of students
+            break;
+        }
+        else cout << "Tokio pasirinkimo nera. Iveskite is naujo: ";
     }
 
     Isvestis(studentai, m);
@@ -54,6 +63,23 @@ void Isvestis(Studentas studentai[], int m){
         cout << setw(17) << left << studentai[i].pavarde << setw(17) << studentai[i].vardas 
             << setw(17) << fixed << setprecision(2) << studentai[i].vidurkis << studentai[i].mediana << endl;
     }
+}
+
+int GetIntInput(){
+    int num;
+    string input;
+
+    while (true) {
+        cin >> input;
+
+        try {
+            num = stoi(input);
+            break;
+        } catch (invalid_argument const &e) {
+            cout << "Ivedete ne skaiciu arba neteisinga skaiciu. Bandykite dar karta." << endl;
+        }
+    }
+    return num;
 }
 
 void Ivestis3(Studentas studentai[], int &m){
@@ -100,11 +126,19 @@ void Ivestis2(Studentas studentai[], int &m){
         float pazymiu_suma = 0;
         cout << "Iveskite pavarde: ";
         cin >> pavarde;
-        cout << "Iveskite visus pazymius (paskutnis pazymys yra egzamino rezultatas). Surase visus pazymius iveskite: 11 ir spauskite enter: ";
+        cout << "Iveskite visus pazymius (paskutnis pazymys yra egzamino rezultatas). Surase visus pazymius iveskite 11 ir spauskite enter:\n";
 
         int n=0;
-        while (n < 100 && cin >> sk[n]) {
+        while (n < 100)
+        {
+            while(true){
+                sk[n] = GetIntInput();
+                if(sk[n] > 0 && sk[n] <= 11) break;
+                cout << "Tokio pazymio ivesti negalima. Bandykite is naujo:\n"; 
+            }
+            
             if(sk[n] == 11) break;
+
             pazymiu_suma += sk[n];
             n++;
         }
@@ -132,7 +166,6 @@ void Ivestis(Studentas studentai[], int &m){
     getline(infile_count, s);
     int  n = CountN(s);
     while(getline(infile_count, s)) m++;
-    //infile.close();
 
     ifstream infile(INFILENAME);
     string vardas, pavarde;
@@ -172,7 +205,6 @@ float RastiMediana(int arr[], int n){
     if( (n+1) %2 == 0 ) return (arr[n/2] + arr[n/2+1])/2.0;
     else return arr[n/2];
 }
-
 
 int CountN(string line){
 
