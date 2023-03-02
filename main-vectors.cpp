@@ -3,7 +3,8 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
-#include <vector>
+#include "vector"
+#include <cstring>
 #include <limits>
 
 using namespace std;
@@ -22,6 +23,10 @@ int GetIntInput();
 void Ivestis(vector<Studentas> &studentai);
 void Ivestis2(vector<Studentas> &studentai);
 void Ivestis3(vector<Studentas> &studentai);
+
+int Partition(std::vector<Studentas>& arr, int low, int high);
+void Quicksort(std::vector<Studentas>& arr, int low, int high);
+
 void Isvestis(vector<Studentas> &studentai);
 
 
@@ -61,6 +66,7 @@ int main()
 
 void Isvestis(vector<Studentas> &studentai)
 {
+    Quicksort(studentai, 0, studentai.size() - 1);
     cout << endl << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
         << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << string(70, '-') << endl;
 
@@ -70,6 +76,33 @@ void Isvestis(vector<Studentas> &studentai)
             << setw(17) << fixed << setprecision(2) << studentai[i].vidurkis << studentai[i].mediana << endl;
     }
 }
+
+
+void Quicksort(std::vector<Studentas>& arr, int low, int high){
+    if (low < high) {
+        int pi = Partition(arr, low, high);
+        Quicksort(arr, low, pi - 1);
+        Quicksort(arr, pi + 1, high);
+    }
+}
+
+int Partition(std::vector<Studentas>& arr, int low, int high){
+    Studentas pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j <= high - 1; j++) {
+        if (strcmp((arr[j].vardas).c_str(), (pivot.vardas).c_str()) < 0) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        } else if(strcmp((arr[j].vardas).c_str(), (pivot.vardas).c_str()) == 0){
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+    std::swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
 
 int GetIntInput()
 {
