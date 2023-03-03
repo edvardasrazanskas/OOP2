@@ -30,3 +30,6 @@ Sukurti 2 atskirus failus(darbartiniu atveju - main-vectors.cpp ir main-arrays.c
 Papildykite programos versiją (v0.1) taip, kad būtų galima duomenis ne tik įvesti bet ir nuskaityti iš failo.
 
 Reikalavimai output’ui: studentai turi būti surūšiuoti pagal vardus (ar pavardes) ir visi stulpeliai būtų gražiai "išlygiuoti".
+
+# V0.3 
+Papildyta V0.2 versija - functions.h faile perkelta struktūra, algoritmai ir funkcijos.

@@ -116,6 +116,7 @@ void Isvestis(vector<Studentas> &studentai)
     }
 }
 
+// Generates randomly
 void Ivestis3(vector<Studentas> &studentai)
 {
     // Generates random number between 100 and 10'000
@@ -153,6 +154,8 @@ void Ivestis3(vector<Studentas> &studentai)
 }
 
 
+
+// Gets from user input
 void Ivestis2(vector<Studentas> &studentai)
 {
     string vardas, pavarde;
@@ -220,42 +223,48 @@ void Ivestis2(vector<Studentas> &studentai)
     }
 }
 
+
+// Reads from file
 void Ivestis(vector<Studentas> &studentai)
 {
-    // Count n and m
-    ifstream infile_count(INFILENAME);
-    string s;
-    getline(infile_count, s);
-    int  n = CountN(s);
-    int m = 0;
-    while(getline(infile_count, s)) m++;
+    try{
+        // Count n and m
+        ifstream infile_count(INFILENAME);
+        string s;
+        getline(infile_count, s);
+        int  n = CountN(s);
+        int m = 0;
+        while(getline(infile_count, s)) m++;
 
-    ifstream infile(INFILENAME);
-    string vardas, pavarde;
-    int sk[100];
-    getline(infile, vardas);
+        ifstream infile(INFILENAME);
+        string vardas, pavarde;
+        int sk[100];
+        getline(infile, vardas);
 
-    for(int i=0; i<m; i++)
-    {
-        float pazymiu_suma = 0;
+        for(int i=0; i<m; i++)
+        {
+            float pazymiu_suma = 0;
 
-        // Nuskaitom ir apskaiciuojam vidurki
-        infile >> vardas >> pavarde;
-        for(int j=0; j<n; j++){
-            infile >> sk[j];
-            pazymiu_suma += sk[j];
+            // Nuskaitom ir apskaiciuojam vidurki
+            infile >> vardas >> pavarde;
+            for(int j=0; j<n; j++){
+                infile >> sk[j];
+                pazymiu_suma += sk[j];
+            }
+            infile >> sk[n];
+
+            float mediana = RastiMediana(sk, n);
+
+            Studentas studentas{
+                vardas, pavarde,
+                ((pazymiu_suma/n * 0.4) + (sk[n] * 0.6)),
+                mediana
+            };
+
+            studentai.push_back(studentas);
         }
-        infile >> sk[n];
-
-        float mediana = RastiMediana(sk, n);
-
-        Studentas studentas{
-            vardas, pavarde,
-            ((pazymiu_suma/n * 0.4) + (sk[n] * 0.6)),
-            mediana
-        };
-
-        studentai.push_back(studentas);
+    } catch(std::exception const& e){
+        cout << "Nepavyko nuskaityti failo:\n" << e.what() << endl;
     }
 }
 
