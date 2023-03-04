@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const string INFILENAME = "studentai10000.txt";
+const char* INFILENAME = "failai/sugeneruoti/studentai10000.txt";
 
 struct Studentas{
     string vardas;
@@ -224,6 +224,52 @@ void Ivestis2(vector<Studentas> &studentai)
 }
 
 
+void Ivestis(vector<Studentas> &studentai){
+    // Open file for buffered reading
+    ifstream infile_count(INFILENAME);
+    if (!infile_count) {
+        cout << "Failas negalejo buti atidarytas." << endl;
+    } else{
+        infile_count.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string s;
+        getline(infile_count, s);
+        int n = CountN(s);
+        int m = 0;
+        while (getline(infile_count, s)) m++;
+
+        ifstream infile(INFILENAME);
+        infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string vardas, pavarde;
+        int sk[100];
+        getline(infile, vardas);
+
+        for (int i = 0; i < m; i++)
+        {
+            float pazymiu_suma = 0;
+
+            // Nuskaitom ir apskaiciuojam vidurki
+            infile >> vardas >> pavarde;
+            for (int j = 0; j < n; j++) {
+                infile >> sk[j];
+                pazymiu_suma += sk[j];
+            }
+            infile >> sk[n];
+
+            float mediana = RastiMediana(sk, n);
+
+            Studentas studentas{
+                vardas, pavarde,
+                ((pazymiu_suma / n * 0.4) + (sk[n] * 0.6)),
+                mediana
+            };
+
+            studentai.push_back(studentas);
+        }
+    }
+}
+
+
+/*
 // Reads from file
 void Ivestis(vector<Studentas> &studentai)
 {
@@ -267,5 +313,5 @@ void Ivestis(vector<Studentas> &studentai)
         cout << "Nepavyko nuskaityti failo:\n" << e.what() << endl;
     }
 }
-
+*/
 #endif
