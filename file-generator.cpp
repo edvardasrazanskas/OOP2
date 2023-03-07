@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include "Timer.h"
 
 using namespace std;
 
@@ -13,10 +14,11 @@ void GeneratorAndWriter(int kiekis);
 int main()
 {
     for(int i=1000; i<=10000000; i*=10){
+        Timer t;
         GeneratorAndWriter(i);
-        cout << "File with: " << i << " students was created.\n";
-    }    
-    
+        cout << i << " elementu uzpildymas uztruko: " << t.elapsed() << " s\n";
+    }
+    system("pause");
     
     return 0;
 }

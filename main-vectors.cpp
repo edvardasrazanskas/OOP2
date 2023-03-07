@@ -32,5 +32,6 @@ int main()
     }
 
     Isvestis(studentai);
+    system("pause");
     return 0;
 }

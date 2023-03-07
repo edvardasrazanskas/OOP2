@@ -4,22 +4,25 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+//#include <Timer.h>
 
 using namespace std;
 
 void IvestisIsvestis(int kiekis);
 
-// Isvesti i folderi, kuris yra .gitignore faile
-// failai/skirstymas
-
 
 int main()
 {
+    /*
     for(int i=1000; i<=10000000; i*=10){
+        Timer t;
         IvestisIsvestis(i);
         cout << "Failas su: " << i << " studentais buvo paskirstytas.\n";
+        cout << i << " eiluciu failo perskirstymas i skirtingus failus uztruko: " << t.elapsed() << " s\n";
     }
+*/
 
+    system("pause");
     return 0;
 }
 
@@ -39,20 +42,16 @@ void IvestisIsvestis(int kiekis)
 
         stringstream temp_ss;
 
-        
-
         const int buf_size = 1024;
         char* buffer = new char[buf_size];
         outfile5.rdbuf()->pubsetbuf(buffer, buf_size);
         outfile10.rdbuf()->pubsetbuf(buffer, buf_size);
 
-        
-
 
         outfile5 << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
-                << "Galutinis (Vid.)\n" << string(70, '-') << endl;;
+                << "Galutinis (Vid.)\n" << string(70, '-') << endl;
         outfile10 << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
-                << "Galutinis (Vid.)\n" << string(70, '-') << endl;;
+                << "Galutinis (Vid.)\n" << string(70, '-') << endl;
 
         string vardas, pavarde, eilute;
         getline(infile, eilute);

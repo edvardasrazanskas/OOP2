@@ -20,25 +20,25 @@ struct Studentas{
     double mediana;
 };
 
-int Partition(std::vector<Studentas>& arr, int low, int high){
-    Studentas pivot = arr[high];
+
+int Perskirk(vector<Studentas>& arr, int low, int high) {
+    string pivot = arr[high].vardas;
     int i = low - 1;
 
-    for (int j = low; j <= high - 1; j++) {
-        if (strcmp((arr[j].vardas).c_str(), (pivot.vardas).c_str()) < 0) {
-            i++;
-            swap(arr[i], arr[j]);
-        } else if(strcmp((arr[j].vardas).c_str(), (pivot.vardas).c_str()) == 0){
+    for (int j = low; j < high; j++) {
+        if (arr[j].vardas < pivot) {
             i++;
             swap(arr[i], arr[j]);
         }
     }
+
     swap(arr[i + 1], arr[high]);
-    return (i + 1);
+    return i + 1;
 }
-void Quicksort(std::vector<Studentas>& arr, int low, int high){
+
+void Quicksort(vector<Studentas>& arr, int low, int high) {
     if (low < high) {
-        int pi = Partition(arr, low, high);
+        int pi = Perskirk(arr, low, high);
         Quicksort(arr, low, pi - 1);
         Quicksort(arr, pi + 1, high);
     }
