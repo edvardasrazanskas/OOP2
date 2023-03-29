@@ -4,13 +4,13 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
-#include <vector>
+//#include <vector>
 
 using namespace std;
 
 void IvestisIsvestis(int kiekis);
 
-
+//uUuUGAbuga
 int main()
 {
     Timer t;

@@ -2,6 +2,8 @@
 #define FUNKCIJOS_H
 
 #include "vector"
+#include <list>
+#include <deque>
 #include <sstream>
 #include <cstring>
 #include <iostream>
@@ -115,7 +117,6 @@ void Isvestis(vector<Studentas> &studentai)
             << setw(17) << fixed << setprecision(2) << studentai[i].vidurkis << studentai[i].mediana << endl;
     }
 }
-
 // Generates randomly
 void Ivestis3(vector<Studentas> &studentai)
 {
@@ -152,9 +153,6 @@ void Ivestis3(vector<Studentas> &studentai)
         studentai.push_back(studentas);
     }
 }
-
-
-
 // Gets from user input
 void Ivestis2(vector<Studentas> &studentai)
 {
@@ -223,7 +221,6 @@ void Ivestis2(vector<Studentas> &studentai)
     }
 }
 
-
 void Ivestis(vector<Studentas> &studentai){
     // Open file for buffered reading
     ifstream infile_count(INFILENAME);
@@ -267,33 +264,32 @@ void Ivestis(vector<Studentas> &studentai){
         }
     }
 }
-
-
-/*
-// Reads from file
-void Ivestis(vector<Studentas> &studentai)
-{
-    try{
-        // Count n and m
-        ifstream infile_count(INFILENAME);
+void IvestisList(list<Studentas> &studentai){
+    // Open file for buffered reading
+    ifstream infile_count(INFILENAME);
+    if (!infile_count) {
+        cout << "Failas negalejo buti atidarytas." << endl;
+    } else{
+        infile_count.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
         string s;
         getline(infile_count, s);
-        int  n = CountN(s);
+        int n = CountN(s);
         int m = 0;
-        while(getline(infile_count, s)) m++;
+        while (getline(infile_count, s)) m++;
 
         ifstream infile(INFILENAME);
+        infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
         string vardas, pavarde;
         int sk[100];
         getline(infile, vardas);
 
-        for(int i=0; i<m; i++)
+        for (int i = 0; i < m; i++)
         {
             float pazymiu_suma = 0;
 
             // Nuskaitom ir apskaiciuojam vidurki
             infile >> vardas >> pavarde;
-            for(int j=0; j<n; j++){
+            for (int j = 0; j < n; j++) {
                 infile >> sk[j];
                 pazymiu_suma += sk[j];
             }
@@ -303,15 +299,56 @@ void Ivestis(vector<Studentas> &studentai)
 
             Studentas studentas{
                 vardas, pavarde,
-                ((pazymiu_suma/n * 0.4) + (sk[n] * 0.6)),
+                ((pazymiu_suma / n * 0.4) + (sk[n] * 0.6)),
                 mediana
             };
 
             studentai.push_back(studentas);
         }
-    } catch(std::exception const& e){
-        cout << "Nepavyko nuskaityti failo:\n" << e.what() << endl;
     }
 }
-*/
+void IvestisDeq(deque<Studentas> &studentai){
+    // Open file for buffered reading
+    ifstream infile_count(INFILENAME);
+    if (!infile_count) {
+        cout << "Failas negalejo buti atidarytas." << endl;
+    } else{
+        infile_count.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string s;
+        getline(infile_count, s);
+        int n = CountN(s);
+        int m = 0;
+        while (getline(infile_count, s)) m++;
+
+        ifstream infile(INFILENAME);
+        infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string vardas, pavarde;
+        int sk[100];
+        getline(infile, vardas);
+
+        for (int i = 0; i < m; i++)
+        {
+            float pazymiu_suma = 0;
+
+            // Nuskaitom ir apskaiciuojam vidurki
+            infile >> vardas >> pavarde;
+            for (int j = 0; j < n; j++) {
+                infile >> sk[j];
+                pazymiu_suma += sk[j];
+            }
+            infile >> sk[n];
+
+            float mediana = RastiMediana(sk, n);
+
+            Studentas studentas{
+                vardas, pavarde,
+                ((pazymiu_suma / n * 0.4) + (sk[n] * 0.6)),
+                mediana
+            };
+
+            studentai.push_back(studentas);
+        }
+    }
+}
+
 #endif

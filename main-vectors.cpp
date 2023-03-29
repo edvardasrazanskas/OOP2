@@ -7,6 +7,8 @@ using namespace std;
 int main()
 {
     vector<Studentas> studentai;
+    list<Studentas> studentaiList;
+    deque<Studentas> studentaiDeq;
 
     cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
     
