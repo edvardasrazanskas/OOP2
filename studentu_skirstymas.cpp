@@ -1,10 +1,10 @@
+#include "Timer.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <iomanip>
 #include <sstream>
 #include <vector>
-//#include <Timer.h>
 
 using namespace std;
 
@@ -13,14 +13,13 @@ void IvestisIsvestis(int kiekis);
 
 int main()
 {
-    /*
+    Timer t;
     for(int i=1000; i<=10000000; i*=10){
-        Timer t;
+        t.reset();
         IvestisIsvestis(i);
         cout << "Failas su: " << i << " studentais buvo paskirstytas.\n";
         cout << i << " eiluciu failo perskirstymas i skirtingus failus uztruko: " << t.elapsed() << " s\n";
     }
-*/
 
     system("pause");
     return 0;

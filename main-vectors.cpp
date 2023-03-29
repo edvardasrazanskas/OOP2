@@ -1,5 +1,6 @@
 #include <iostream>
 #include "funkcijos.h"
+#include "Timer.h"
 
 using namespace std;
 
