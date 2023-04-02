@@ -1,7 +1,7 @@
 #ifndef FUNKCIJOS_H
 #define FUNKCIJOS_H
 
-#include "vector"
+#include <vector>
 #include <list>
 #include <deque>
 #include <sstream>
@@ -10,10 +10,11 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <algorithm>
 
 using namespace std;
 
-const char* INFILENAME = "failai/sugeneruoti/studentai10000000.txt";
+const char* INFILENAME = "failai/sugeneruoti/studentai1000000.txt";
 
 struct Studentas{
     string vardas;
@@ -22,8 +23,23 @@ struct Studentas{
     double mediana;
 };
 
+bool compareStudentasByVardas(const Studentas& s1, const Studentas& s2) {
+    return s1.vardas < s2.vardas;
+}
 
-int Perskirk(vector<Studentas>& arr, int low, int high) {
+void sortList(list<Studentas>& studentai) {
+    studentai.sort(compareStudentasByVardas);
+}
+
+void sortDeque(deque<Studentas>& studentai) {
+    sort(studentai.begin(), studentai.end(), compareStudentasByVardas);
+}
+
+void sortVector(vector<Studentas>& studentai) {
+    sort(studentai.begin(), studentai.end(), compareStudentasByVardas);
+}
+
+int PerskirkDeq(deque<Studentas>& arr, int low, int high) {
     string pivot = arr[high].vardas;
     int i = low - 1;
 
@@ -38,11 +54,11 @@ int Perskirk(vector<Studentas>& arr, int low, int high) {
     return i + 1;
 }
 
-void Quicksort(vector<Studentas>& arr, int low, int high) {
+void QuicksortDeq(deque<Studentas>& arr, int low, int high) {
     if (low < high) {
-        int pi = Perskirk(arr, low, high);
-        Quicksort(arr, low, pi - 1);
-        Quicksort(arr, pi + 1, high);
+        int pi = PerskirkDeq(arr, low, high);
+        QuicksortDeq(arr, low, pi - 1);
+        QuicksortDeq(arr, pi + 1, high);
     }
 }
 
@@ -105,9 +121,9 @@ int CountN(string line)
     return count-3;
 }
 
+/*
 void Isvestis(vector<Studentas> &studentai)
 {
-    Quicksort(studentai, 0, studentai.size() - 1);
     cout << endl << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
         << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << string(70, '-') << endl;
 
@@ -115,6 +131,18 @@ void Isvestis(vector<Studentas> &studentai)
     {
         cout << setw(17) << left << studentai[i].pavarde << setw(17) << studentai[i].vardas 
             << setw(17) << fixed << setprecision(2) << studentai[i].vidurkis << studentai[i].mediana << endl;
+    }
+}*/
+template<typename T>
+void Isvestis(T& studentai)
+{
+    std::cout << std::endl << std::setw(17) << std::left << "Pavardė" << std::setw(17) << "Vardas" << std::setw(17)
+        << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << std::string(70, '-') << std::endl;
+
+    for(const auto& s : studentai)
+    {
+        std::cout << std::setw(17) << std::left << s.pavarde << std::setw(17) << s.vardas
+            << std::setw(17) << std::fixed << std::setprecision(2) << s.vidurkis << s.mediana << std::endl;
     }
 }
 
@@ -222,8 +250,9 @@ void Ivestis2(vector<Studentas> &studentai)
     }
 }
 
-template <typename T> 
-void Ivestis(T &studentai){
+template <typename T>
+void Ivestis(T &studentai, int tipas){
+    cout << "Ivestis func works " << endl;
     // Open file for buffered reading
     ifstream infile_count(INFILENAME);
     if (!infile_count) {
@@ -238,7 +267,7 @@ void Ivestis(T &studentai){
         infile_count.close();
 
         ifstream infile(INFILENAME);
-        infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        //infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
         string vardas, pavarde;
         int sk[100];
         getline(infile, vardas);

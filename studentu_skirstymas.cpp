@@ -10,7 +10,6 @@ using namespace std;
 
 void IvestisIsvestis(int kiekis);
 
-//uUuUGAbuga
 int main()
 {
     Timer t;
