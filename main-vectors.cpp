@@ -46,7 +46,6 @@ int main()
                     sortDeque(studentaiDeq);
                 }
                 else if (cin.eof()) {
-                    cout << "cin.eof triggered" << endl;
                     break;
                 }
 
