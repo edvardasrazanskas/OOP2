@@ -12,11 +12,10 @@ int main()
 
     float tipas;
     int kiekis;
-    //cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
+    cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
     while (true)
     {
-        //float pasirinkimas = GetIntInput();
-        float pasirinkimas = 1;
+        float pasirinkimas = GetIntInput();
         if ( pasirinkimas == 1 ){
             
             Timer t;
