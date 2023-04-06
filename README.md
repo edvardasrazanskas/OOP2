@@ -33,3 +33,18 @@ Reikalavimai output’ui: studentai turi būti surūšiuoti pagal vardus (ar 
 
 # V0.3 
 Papildyta V0.2 versija - functions.h faile perkelta struktūra, algoritmai ir funkcijos.
+
+# V0.4
+Studentų rūšiavimo programa: studentu_skirstymas.cpp
+Failų generatorius: file-generator.cpp
+
+# V0.5
+
+### Lentelė
+        1 000	    10 000 	    100 000     1 000 000 	10 000 000 
+vector	0.0063	    0.2813	    0.4832	    4.7886	    27.1517
+list	0.0066	    0.0439	    0.4225	    4.0452	    24.3295
+deque	0.0065	    0.0546	    0.5045	    5.4876	    32.4625
+
+# V1.0
+Optimizuotos programos
