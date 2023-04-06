@@ -238,5 +238,3 @@ void Ivestis(T &studentai, int tipas){
         infile.close();
     }
 }
-
-#endif
