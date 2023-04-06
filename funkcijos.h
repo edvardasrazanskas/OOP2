@@ -14,8 +14,6 @@
 
 using namespace std;
 
-const char* INFILENAME = "failai/sugeneruoti/studentai1000000.txt";
-
 struct Studentas{
     string vardas;
     string pavarde;
@@ -38,15 +36,16 @@ float RastiMediana(int arr[], int n);
 
 int CountN(string line);
 
-template<typename T>
-void Isvestis(T& studentai);
+template<typename T> void Isvestis(T& studentai);
 
 // Generates randomly
 void Ivestis3(vector<Studentas> &studentai);
 // Gets from user input
 void Ivestis2(vector<Studentas> &studentai);
 
-template <typename T>
-void Ivestis(T &studentai, int tipas);
+
+void Ivestis(vector<Studentas> &studentai, int &kiekis);
+void Ivestis(list<Studentas> &studentai, int &kiekis);
+void Ivestis(deque<Studentas> &studentai, int &kiekis);
 
 #endif

@@ -11,9 +11,8 @@ int main()
     deque<Studentas> studentaiDeq;
 
     float tipas;
-
+    int kiekis;
     cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
-
     while (true)
     {
         float pasirinkimas = GetIntInput();
@@ -23,26 +22,28 @@ int main()
             Timer t;
             cout << "Pasirinkite kaip noresite skaityti:\na) su vectors (rasykite 1)\na) su lists (rasykite 2)\nb) su deque (rasykite 3): ";
             while(true){
-
                 tipas = GetIntInput();
+
+                cout << "Iveskite kieki kuri skaitysite pagal failo pavadinima: ";
+                cin >> kiekis;
+
                 t.reset();
 
                 if (tipas == 1){
-                    Ivestis<vector<Studentas>>(studentai, tipas); // ***** Reading from a file
-                    cout << "after ivestis vecotr" << endl;
+                    Ivestis(studentai, kiekis); // ***** Reading from a file
+                    cout << "Failas nuskaitytas. Rikiuojama..." << endl;
                     sortVector(studentai);
-                    cout << "after quicksort vector" << endl;
                 }
                 else if (tipas == 2)
                 {
-                    Ivestis<list<Studentas>>(studentaiList, tipas); // ***** Reading from a file
-                    cout << "after ivestis list" << endl;
+                    Ivestis(studentaiList, kiekis); // ***** Reading from a file
+                    cout << "Failas nuskaitytas. Rikiuojama..." << endl;
                     sortList(studentaiList);
-                    cout << "after quicksort list" << endl;
                 }
                 else if (tipas == 3)
                 {
-                    Ivestis<deque<Studentas>>(studentaiDeq, tipas); // ***** Reading from a file
+                    Ivestis(studentaiDeq, kiekis); // ***** Reading from a file
+                    cout << "Failas nuskaitytas. Rikiuojama..." << endl;
                     sortDeque(studentaiDeq);
                 }
                 else if (cin.eof()) {
@@ -53,7 +54,7 @@ int main()
                 break;
             }
             
-            cout << "Failas buvo nuskaitytas per: " <<  t.elapsed() << endl;
+            cout << "Failas buvo nuskaitytas ir išrikiuotas per: " <<  t.elapsed() << endl;
             break;
         }
         else if (pasirinkimas == 2){
@@ -71,10 +72,19 @@ int main()
     }
     system("pause");
     
-    if(tipas == 1) Isvestis<vector<Studentas>>(studentai);
-    else if(tipas == 2) Isvestis<list<Studentas>>(studentaiList);
-    else if(tipas == 3) Isvestis<deque<Studentas>>(studentaiDeq);
-
+    cout << endl << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
+        << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << string(70, '-') << endl;
+    
+    if(tipas==1){
+        for(const auto& s : studentai)
+            cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+    } else if(tipas == 2){
+        for(const auto& s : studentaiList)
+            cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+    } else if(tipas == 3){
+        for(const auto& s : studentaiDeq)
+            cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+    }
     system("pause");
     return 0;
 }

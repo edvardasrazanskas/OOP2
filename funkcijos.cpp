@@ -1,5 +1,6 @@
 #include "funkcijos.h"
 
+
 bool compareStudentasByVardas(const Studentas& s1, const Studentas& s2) {
     return s1.vardas < s2.vardas;
 }
@@ -72,20 +73,7 @@ int CountN(string line)
         count++;
 
     return count-3;
-}
-
-template<typename T>
-void Isvestis(T& studentai)
-{
-    std::cout << std::endl << std::setw(17) << std::left << "Pavardė" << std::setw(17) << "Vardas" << std::setw(17)
-        << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << std::string(70, '-') << std::endl;
-
-    for(const auto& s : studentai)
-    {
-        std::cout << std::setw(17) << std::left << s.pavarde << std::setw(17) << s.vardas
-            << std::setw(17) << std::fixed << std::setprecision(2) << s.vidurkis << s.mediana << std::endl;
-    }
-}
+} 
 
 // Generates randomly
 void Ivestis3(vector<Studentas> &studentai)
@@ -191,9 +179,103 @@ void Ivestis2(vector<Studentas> &studentai)
     }
 }
 
-template <typename T>
-void Ivestis(T &studentai, int tipas){
-    cout << "Ivestis func works " << endl;
+void Ivestis(deque<Studentas> &studentai, int &kiekis){
+    string INFILENAME = "failai/sugeneruoti/studentai" + to_string(kiekis) + ".txt";
+
+    // Open file for buffered reading
+    ifstream infile_count(INFILENAME);
+    if (!infile_count) {
+        cout << "Failas negalejo buti atidarytas." << endl;
+    } else{
+        infile_count.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string s;
+        getline(infile_count, s);
+        int n = CountN(s);
+        int m = 0;
+        while (getline(infile_count, s)) m++;
+        infile_count.close();
+
+        ifstream infile(INFILENAME);
+        //infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string vardas, pavarde;
+        int sk[100];
+        getline(infile, vardas);
+
+        for (int i = 0; i < m; i++)
+        {
+            float pazymiu_suma = 0;
+
+            // Nuskaitom ir apskaiciuojam vidurki
+            infile >> vardas >> pavarde;
+            for (int j = 0; j < n; j++) {
+                infile >> sk[j];
+                pazymiu_suma += sk[j];
+            }
+            infile >> sk[n];
+
+            float mediana = RastiMediana(sk, n);
+
+            Studentas studentas{
+                vardas, pavarde,
+                ((pazymiu_suma / n * 0.4) + (sk[n] * 0.6)),
+                mediana
+            };
+
+            studentai.push_back(studentas);
+        }
+        infile.close();
+    }
+}
+
+void Ivestis(list<Studentas> &studentai, int &kiekis){
+    string INFILENAME = "failai/sugeneruoti/studentai" + to_string(kiekis) + ".txt";
+    // Open file for buffered reading
+    ifstream infile_count(INFILENAME);
+    if (!infile_count) {
+        cout << "Failas negalejo buti atidarytas." << endl;
+    } else{
+        infile_count.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string s;
+        getline(infile_count, s);
+        int n = CountN(s);
+        int m = 0;
+        while (getline(infile_count, s)) m++;
+        infile_count.close();
+
+        ifstream infile(INFILENAME);
+        //infile.rdbuf()->pubsetbuf(new char[1 << 20], 1 << 20); // Set buffer to 1 MB
+        string vardas, pavarde;
+        int sk[100];
+        getline(infile, vardas);
+
+        for (int i = 0; i < m; i++)
+        {
+            float pazymiu_suma = 0;
+
+            // Nuskaitom ir apskaiciuojam vidurki
+            infile >> vardas >> pavarde;
+            for (int j = 0; j < n; j++) {
+                infile >> sk[j];
+                pazymiu_suma += sk[j];
+            }
+            infile >> sk[n];
+
+            float mediana = RastiMediana(sk, n);
+
+            Studentas studentas{
+                vardas, pavarde,
+                ((pazymiu_suma / n * 0.4) + (sk[n] * 0.6)),
+                mediana
+            };
+
+            studentai.push_back(studentas);
+        }
+        infile.close();
+    }
+}
+
+void Ivestis(vector<Studentas> &studentai, int &kiekis){
+    string INFILENAME = "failai/sugeneruoti/studentai" + to_string(kiekis) + ".txt";
     // Open file for buffered reading
     ifstream infile_count(INFILENAME);
     if (!infile_count) {
