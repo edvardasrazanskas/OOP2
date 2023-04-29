@@ -71,7 +71,7 @@ int main()
     }
     system("pause");
     
-    cout << endl << setw(17) << left << "Pavardė" << setw(17) << "Vardas" << setw(17)
+    cout << endl << setw(17) << left << "Pavarde" << setw(17) << "Vardas" << setw(17)
         << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << string(70, '-') << endl;
     
     if(tipas==1){
