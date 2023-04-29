@@ -1,6 +1,6 @@
 main: funkcijos.o
-	g++ -o3 main main-vectors.cpp funkcijos.o
+	g++ -o3 -o main main-vectors.cpp funkcijos.o
 funkcijos:
 	g++ -c funkcijos.cpp
 clean:
-	rm *.o main
+	del *.o main.exe

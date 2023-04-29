@@ -11,11 +11,12 @@ int main()
     deque<Studentas> studentaiDeq;
 
     float tipas;
+    float pasirinkimas;
     int kiekis;
     cout << "Pasirinkite ka noresite daryti:\na) skaityti pazymius is failo (rasykite 1)\nb) patys ivesite varda pavarde ir pazymius (rasykite 2)\nc) programa sugeneruos atsitiktini kieki atsitiktiniu pazymiu atsitiktiniam kiekiui studentu (rasykite 3): ";
     while (true)
     {
-        float pasirinkimas = GetIntInput();
+        pasirinkimas = GetIntInput();
         if ( pasirinkimas == 1 ){
             
             Timer t;
@@ -74,14 +75,19 @@ int main()
     cout << endl << setw(17) << left << "Pavarde" << setw(17) << "Vardas" << setw(17)
         << "Galutinis (Vid.)"<< "/ Galutinis (Med.)\n" << string(70, '-') << endl;
     
-    if(tipas==1){
+    if(pasirinkimas == 1){
+        if(tipas==1){
+            for(const auto& s : studentai)
+                cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+        } else if(tipas == 2){
+            for(const auto& s : studentaiList)
+                cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+        } else if(tipas == 3){
+            for(const auto& s : studentaiDeq)
+                cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
+        }
+    } else {
         for(const auto& s : studentai)
-            cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
-    } else if(tipas == 2){
-        for(const auto& s : studentaiList)
-            cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
-    } else if(tipas == 3){
-        for(const auto& s : studentaiDeq)
             cout << setw(17) << left << s.pavarde << setw(17) << s.vardas << setw(17) << fixed << setprecision(2) << s.vidurkis << s.mediana << endl;
     }
     system("pause");
