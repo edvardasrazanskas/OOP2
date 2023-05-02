@@ -26,13 +26,17 @@ public:
     inline double vidurkis() const { return vidurkis_; }    // get'eriai, inline
     inline double mediana() const { return mediana_; }       // get'eriai, inline
 
+    // Rule of five
     Studentas() = default;
     Studentas(std::string vardas, std::string pavarde, double vidurkis, double mediana)
     : vardas_{vardas}, pavarde_{pavarde}, vidurkis_{vidurkis}, mediana_{mediana} {}
-    
+
     Studentas(const Studentas& s) = default;
     Studentas& operator=(const Studentas& s) = default;
     ~Studentas() = default;
+
+    // Overloading << operator
+    friend std::ostream& operator<< (std::ostream& out, const Studentas& point);
 
 };
 
