@@ -48,3 +48,17 @@ deque	0.0065	    0.0546	    0.5045	    5.4876	    32.4625
 
 # V1.0
 Optimizuotos programos
+
+# V1.1
+Naudojamas nebe struct, o class tipas objektui Studentas
+
+# V1.2
+Realizuota "Rule of five" klasei Studentas
+
+# V1.5
+Sukurta bazinė abstrakčioji klasė Zmogus.
+Klasė Studentas tapo išvestine (derived) Zmogaus klase.
+
+# V2.0
+Realizuoti Unit testai
+Sukurta dokumentacija Versijai V1.5 naudojant Doxygen.
