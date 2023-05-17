@@ -1,7 +1,7 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include <vector>
+#include <vector.h>
 #include <sstream>
 #include <cstring>
 #include <iostream>
@@ -13,6 +13,7 @@
 /**
  * \brief Klasė Zmogus yra abstrakti klasė, kuri aprašo funkcijas, kurias privalo turėti jos child klasės.
 */
+
 class Zmogus{
 // realizacija
 protected:
@@ -83,7 +84,7 @@ public:
 /**
  * \brief Išrikiuoja Studentų vektorių pagal vardą
 */
-void sortVector(std::vector<Studentas>& studentai);
+void sortVector(vector<Studentas>& studentai);
 /**
  * \brief Funkcija, patikrinanti ar vartotojas teisingai įveda skaičius
 */
@@ -98,18 +99,18 @@ int CountN(std::string line);
 /**
  * \brief Funkcija, automatiškai sugeneruojanti atsitiktinį kiekį studentų su atsitiktiniais pažymiais
 */
-void Ivestis3(std::vector<Studentas> &studentai);
+void Ivestis3(vector<Studentas> &studentai);
 
 // Gets from user input
 /**
  * \brief Funkcija, leidžianti vartotojui įvesti studentų vardą, pavardę ir turimus pažymius
 */
-void Ivestis2(std::vector<Studentas> &studentai);
+void Ivestis2(vector<Studentas> &studentai);
 
 // Reads from file
 /**
  * \brief Funkcija, skaitanti informaciją apie studentus iš failų
 */
-void Ivestis(std::vector<Studentas> &studentai, int &kiekis);
+void Ivestis(vector<Studentas> &studentai, int &kiekis);
 
 #endif
