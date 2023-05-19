@@ -10,6 +10,8 @@
 #include <limits>
 #include <algorithm>
 
+using std::vector;
+
 /**
  * \brief Klasė Zmogus yra abstrakti klasė, kuri aprašo funkcijas, kurias privalo turėti jos child klasės.
 */

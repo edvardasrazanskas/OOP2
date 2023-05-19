@@ -13,7 +13,7 @@ bool compareStudentasByVardas(const Studentas& s1, const Studentas& s2) {
     return s1.vardas() < s2.vardas();
 }
 
-void sortVector(std::vector<Studentas>& studentai) {
+void sortVector(vector<Studentas>& studentai) {
     sort(studentai.begin(), studentai.end(), compareStudentasByVardas);
 }
 
@@ -61,7 +61,7 @@ float RastiMediana(int arr[], int n)
 }
 
 // Generates randomly
-void Ivestis3(std::vector<Studentas> &studentai)
+void Ivestis3(vector<Studentas> &studentai)
 {
     // Generates random number between 100 and 10'000
     srand(time(nullptr));
@@ -98,7 +98,7 @@ void Ivestis3(std::vector<Studentas> &studentai)
 }
 
 // Gets from user input
-void Ivestis2(std::vector<Studentas> &studentai)
+void Ivestis2(vector<Studentas> &studentai)
 {
     std::string vardas, pavarde;
     int sk[100], m;
@@ -166,7 +166,7 @@ void Ivestis2(std::vector<Studentas> &studentai)
 }
 
 // Reading from files
-void Ivestis(std::vector<Studentas> &studentai, int &kiekis){
+void Ivestis(vector<Studentas> &studentai, int &kiekis){
     std::string INFILENAME = "failai/sugeneruoti/studentai" + std::to_string(kiekis) + ".txt";
 
     // Open file for buffered reading
