@@ -1,7 +1,7 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include <vector.h>
+#include <vector>
 #include <sstream>
 #include <cstring>
 #include <iostream>
